@@ -1,0 +1,54 @@
+{
+	"name": "risk-viz-v2",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"db-reset": "prisma migrate reset --skip-seed --force && prisma db push && prisma db seed"
+	},
+	"prisma": {
+		"seed": "tsx prisma/seed.ts"
+	},
+	"dependencies": {
+		"@nextui-org/react": "^2.2.9",
+		"@nextui-org/tabs": "^2.0.26",
+		"@react-stately/data": "^3.11.0",
+		"@reduxjs/toolkit": "^2.0.1",
+		"clsx": "^2.0.0",
+		"d3": "^7.8.5",
+		"framer-motion": "^10.16.16",
+		"lodash": "^4.17.21",
+		"mapbox-gl": "^3.2.0",
+		"nex": "^2.0.22",
+		"next": "14.0.4",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-redux": "^9.0.4",
+		"uuid": "^9.0.1"
+	},
+	"devDependencies": {
+		"@prisma/client": "^5.7.1",
+		"@types/d3": "^7.4.3",
+		"@types/lodash": "^4.14.202",
+		"@types/mapbox-gl": "^2.7.21",
+		"@types/node": "^20.10.5",
+		"@types/papaparse": "^5.3.14",
+		"@types/react": "^18",
+		"@types/react-dom": "^18",
+		"@types/uuid": "^9.0.7",
+		"@typescript-eslint/eslint-plugin": "^6.14.0",
+		"@typescript-eslint/parser": "^6.14.0",
+		"autoprefixer": "^10.4.16",
+		"eslint": "^8.55.0",
+		"eslint-config-next": "14.0.4",
+		"postcss": "^8.4.32",
+		"prisma": "^5.7.1",
+		"tailwindcss": "^3.3.6",
+		"ts-node": "^10.9.2",
+		"tsx": "^4.7.0",
+		"typescript": "^5.3.3"
+	}
+}

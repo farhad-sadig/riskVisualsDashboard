@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.axis {
+
+    shape-rendering: geometricPrecision;
+}
+
+
+#tooltip {
+    position: absolute;
+    padding: 10px;
+    background-color: white;
+    pointer-events: none;
+    display: none;
+
+}
+
+.lineTest {
+
+    fill: none;
+    stroke: "#fde68a";
+    stroke-width: 2
+}

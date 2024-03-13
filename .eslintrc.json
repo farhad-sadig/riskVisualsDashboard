@@ -1,0 +1,11 @@
+{
+	"extends": "next/core-web-vitals",
+	"overrides": [
+		{
+			"files": ["**/mapbox/**"],
+			"rules": {
+				"@typescript-eslint/no-var-requires": "off"
+			}
+		}
+	]
+}
