@@ -22,6 +22,7 @@
 			"@/*": ["./*"]
 		}
 	},
+
 	"include": [
 		"next-env.d.ts",
 		"**/*.ts",
@@ -33,5 +34,5 @@
 		"src/ui/navTabs/NavTabs.tsx",
 		"src/ui/chartControls"
 	],
-	"exclude": ["node_modules"]
+	"exclude": ["node_modules", "data"]
 }

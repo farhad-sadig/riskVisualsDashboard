@@ -31,10 +31,6 @@ const LineChart = () => {
 				return;
 			}
 			const currentSVGRef = svgRef.current;
-			if (!riskData || riskData.length) {
-				currentSVGRef.textContent = "Couldn't fetch the data";
-				return;
-			}
 
 			const rect = svgRef.current.getBoundingClientRect();
 			const dimensions = { width: rect.width, height: rect.height };
@@ -193,7 +189,6 @@ const LineChart = () => {
 						d3.select(tooltipRef.current)
 							.select(".risk-rating")
 							.text(`${Math.round(closestRiskRating.y * 100)}%`);
-						console.log(closestRiskRating.y);
 					}
 				})
 				.on("mouseleave", function (event) {
