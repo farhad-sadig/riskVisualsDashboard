@@ -11,12 +11,6 @@ export interface RiskData extends PrismaRiskData {
 }
 [];
 
-interface FetchDataResponse {
-	riskData: RiskData[];
-	uniqueYears: number[];
-	uniqueAssetNames: string[];
-	uniqueBusinessCategories: string[];
-}
 const prismaClientSingleton = () => {
 	return new PrismaClient();
 };
@@ -98,69 +92,6 @@ export const fetchedUniqueBusCats = async (): Promise<string[]> => {
 		});
 
 		return uniqueBusinessCategories.map((entry) => entry.businessCategory);
-	} finally {
-		await prisma.$disconnect();
-	}
-};
-export const fetchData = async (): Promise<FetchDataResponse> => {
-	try {
-		const riskDataPromise = prisma.riskData.findMany({
-			include: {
-				riskFactors: {
-					orderBy: {
-						subRiskRating: "desc"
-					}
-				}
-			},
-			orderBy: {
-				year: "asc"
-			}
-		});
-
-		const uniqueYearsPromise = prisma.riskData.findMany({
-			distinct: ["year"],
-			orderBy: {
-				year: "asc"
-			}
-		});
-
-		const uniqueAssetNamesPromise = prisma.riskData.findMany({
-			distinct: ["assetName"],
-			orderBy: {
-				assetName: "asc"
-			}
-		});
-
-		const uniqueBusinessCategoriesPromise = prisma.riskData.findMany({
-			distinct: ["businessCategory"],
-			orderBy: {
-				businessCategory: "asc"
-			}
-		});
-
-		const riskData = await riskDataPromise;
-		const uniqueYears = await uniqueYearsPromise;
-		const uniqueAssetNames = await uniqueAssetNamesPromise;
-		const uniqueBusinessCategories = await uniqueBusinessCategoriesPromise;
-
-		const formattedRiskData = riskData.map((data) => ({
-			...data,
-			riskFactors: data.riskFactors.map((factor) => ({
-				...factor,
-				subRiskRating: Number(factor.subRiskRating)
-			}))
-		}));
-
-		return {
-			riskData: formattedRiskData,
-			uniqueYears: uniqueYears.map((entry) => entry.year),
-			uniqueAssetNames: uniqueAssetNames.map((entry) => entry.assetName),
-			uniqueBusinessCategories: uniqueBusinessCategories.map(
-				(entry) => entry.businessCategory
-			)
-		};
-	} catch (error) {
-		throw new Error("Failed to fetch data");
 	} finally {
 		await prisma.$disconnect();
 	}
