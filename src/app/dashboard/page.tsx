@@ -3,7 +3,8 @@ import {
 	fetchRiskData,
 	fetchUniqueAssetNames,
 	fetchUniqueYears,
-	fetchedUniqueBusCats
+	fetchedUniqueBusCats,
+	fetchData
 } from "@/src/lib/data";
 import { setRiskData } from "@/src/lib/features/dataSlice";
 import { setYears } from "@/src/lib/features/selectedYearSlice";
@@ -13,37 +14,53 @@ import Map from "@/src/ui/map/Map";
 
 import Table from "@/src/ui/table/Table";
 import YearSelect from "@/src/ui/yearSelect/yearSelect";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { setAssetNames } from "@/src/lib/features/assetNamesSlice";
 import { setBusinessCategories } from "@/src/lib/features/businessCategoriesSlice";
 import Spinner from "@/src/ui/Spinner";
-
+import useSWR from "swr";
 export default function DashboardPage() {
 	const dispatch = useAppDispatch();
-	const [loading, setLoading] = useState<boolean>(true);
+	const { data: fetchedData, error } = useSWR("dashboardData", fetchData);
+	const loading = !fetchedData && !error;
+	// useEffect(() => {
+	// 	const initializeData = async () => {
+	// 		try {
+	// 			const [riskData, years, assetNames, busCats] = await Promise.all([
+	// 				fetchRiskData(),
+	// 				fetchUniqueYears(),
+	// 				fetchUniqueAssetNames(),
+	// 				fetchedUniqueBusCats()
+	// 			]);
+
+	// 			dispatch(setRiskData(riskData));
+	// 			dispatch(setYears(years));
+	// 			dispatch(setAssetNames(assetNames));
+	// 			dispatch(setBusinessCategories(busCats));
+	// 		} catch (error) {
+	// 			console.error("Error initializing data:", error);
+	// 		} finally {
+	// 			setLoading(false);
+	// 		}
+	// 	};
+
+	// 	initializeData();
+	// }, [dispatch]);
+
 	useEffect(() => {
-		const initializeData = async () => {
-			try {
-				const [riskData, years, assetNames, busCats] = await Promise.all([
-					fetchRiskData(),
-					fetchUniqueYears(),
-					fetchUniqueAssetNames(),
-					fetchedUniqueBusCats()
-				]);
-
-				dispatch(setRiskData(riskData));
-				dispatch(setYears(years));
-				dispatch(setAssetNames(assetNames));
-				dispatch(setBusinessCategories(busCats));
-			} catch (error) {
-				console.error("Error initializing data:", error);
-			} finally {
-				setLoading(false);
-			}
-		};
-
-		initializeData();
-	}, [dispatch]);
+		if (fetchedData) {
+			const {
+				riskData,
+				uniqueYears,
+				uniqueAssetNames,
+				uniqueBusinessCategories
+			} = fetchedData;
+			dispatch(setRiskData(riskData));
+			dispatch(setYears(uniqueYears));
+			dispatch(setAssetNames(uniqueAssetNames));
+			dispatch(setBusinessCategories(uniqueBusinessCategories));
+		}
+	}, [fetchedData, dispatch]);
 
 	return (
 		<>
