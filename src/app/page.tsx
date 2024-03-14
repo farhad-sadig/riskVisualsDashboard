@@ -3,7 +3,7 @@ import {
 	fetchRiskData,
 	fetchUniqueAssetNames,
 	fetchUniqueYears,
-	fetchedUniqueBusCats
+	fetchUniqueBusCats
 } from "@/src/lib/data";
 import { setRiskData } from "@/src/lib/features/dataSlice";
 import { setYears } from "@/src/lib/features/selectedYearSlice";
@@ -13,7 +13,7 @@ import Map from "@/src/ui/map/Map";
 
 import Table from "@/src/ui/table/Table";
 import YearSelect from "@/src/ui/yearSelect/yearSelect";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { setAssetNames } from "@/src/lib/features/assetNamesSlice";
 import { setBusinessCategories } from "@/src/lib/features/businessCategoriesSlice";
 import Spinner from "@/src/ui/Spinner";
@@ -21,30 +21,30 @@ import Spinner from "@/src/ui/Spinner";
 export default function DashboardPage() {
 	const dispatch = useAppDispatch();
 	const [loading, setLoading] = useState<Boolean>(true);
-	useEffect(() => {
-		const initializeData = async () => {
-			try {
-				const [riskData, years, assetNames, busCats] = await Promise.all([
-					fetchRiskData(),
-					fetchUniqueYears(),
-					fetchUniqueAssetNames(),
-					fetchedUniqueBusCats()
-				]);
+	const initializeData = useCallback(async () => {
+		try {
+			const [riskData, years, assetNames, busCats] = await Promise.all([
+				fetchRiskData(),
+				fetchUniqueYears(),
+				fetchUniqueAssetNames(),
+				fetchUniqueBusCats()
+			]);
 
-				dispatch(setRiskData(riskData));
-				dispatch(setYears(years));
-				dispatch(setAssetNames(assetNames));
-				dispatch(setBusinessCategories(busCats));
-			} catch (error) {
-				console.error(`Error details: `, error);
-				throw new Error(`Error initializing data`);
-			} finally {
-				setLoading(false);
-			}
-		};
-
-		initializeData();
+			dispatch(setRiskData(riskData));
+			dispatch(setYears(years));
+			dispatch(setAssetNames(assetNames));
+			dispatch(setBusinessCategories(busCats));
+		} catch (error) {
+			console.error(`Error details: `, error);
+			throw new Error(`Error initializing data`);
+		} finally {
+			setLoading(false);
+		}
 	}, [dispatch]);
+	
+	useEffect(() => {
+		initializeData();
+	}, [initializeData]);
 	if (loading) return <Spinner />;
 
 	return (

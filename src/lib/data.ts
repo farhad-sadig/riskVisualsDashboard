@@ -82,7 +82,7 @@ export const fetchUniqueAssetNames = async (): Promise<string[]> => {
 	}
 };
 
-export const fetchedUniqueBusCats = async (): Promise<string[]> => {
+export const fetchUniqueBusCats = async (): Promise<string[]> => {
 	try {
 		const uniqueBusinessCategories = await prisma.riskData.findMany({
 			distinct: ["businessCategory"],

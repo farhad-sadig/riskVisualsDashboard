@@ -12,7 +12,7 @@ import {
 import { ChevronDownIcon } from "../table/ChevronDownIcon";
 import { RiskDataItem } from "../table/Table";
 
-import { fetchUniqueAssetNames, fetchedUniqueBusCats } from "@/src/lib/data";
+import { fetchUniqueAssetNames, fetchUniqueBusCats } from "@/src/lib/data";
 import { useAppDispatch, useAppSelector } from "@/src/lib/hooks";
 import { selectAssetNames } from "@/src/lib/features/assetNamesSlice";
 import { selectBusinessCategories } from "@/src/lib/features/businessCategoriesSlice";
@@ -98,7 +98,7 @@ export default function ChartControls() {
 
 	useEffect(() => {
 		const setChartControlDataOnServer = async () => {
-			const busCats = await fetchedUniqueBusCats();
+			const busCats = await fetchUniqueBusCats();
 			const assetNames = await fetchUniqueAssetNames();
 			setControlItems({ busCats, assetNames });
 		};
