@@ -17,7 +17,9 @@ export default async function RootLayout({
 	return (
 		<html lang="en">
 			<body className={`${inter.className}  antialiased`}>
-				<CombinedProvider>{children}</CombinedProvider>
+				<CombinedProvider>
+					<div className="flex-grow p-6 md:p-12">{children}</div>
+				</CombinedProvider>
 			</body>
 		</html>
 	);
