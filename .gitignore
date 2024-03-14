@@ -2,9 +2,7 @@
 
 # dependencies
 /node_modules
-/data
 /.pnp
-/prisma/seed.ts
 .pnp.js
 .yarn/install-state.gz
 
