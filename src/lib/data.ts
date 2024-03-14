@@ -14,12 +14,8 @@ export interface RiskData extends PrismaRiskData {
 const prismaClientSingleton = () => {
 	return new PrismaClient();
 };
-declare global {
-	var prisma: undefined | ReturnType<typeof prismaClientSingleton>;
-}
-const prisma = globalThis.prisma ?? prismaClientSingleton();
 
-if (process.env.NODE_ENV !== "production") globalThis.prisma = prisma;
+const prisma = prismaClientSingleton();
 
 export const fetchRiskData = async (): Promise<RiskData[]> => {
 	try {
@@ -47,8 +43,6 @@ export const fetchRiskData = async (): Promise<RiskData[]> => {
 		return formattedRiskData;
 	} catch (error) {
 		throw error;
-	} finally {
-		await prisma.$disconnect();
 	}
 };
 
@@ -62,8 +56,8 @@ export const fetchUniqueYears = async (): Promise<number[]> => {
 		});
 
 		return uniqueYears.map((entry) => entry.year);
-	} finally {
-		await prisma.$disconnect();
+	} catch (error) {
+		throw error;
 	}
 };
 
@@ -77,8 +71,8 @@ export const fetchUniqueAssetNames = async (): Promise<string[]> => {
 		});
 
 		return uniqueAssetNames.map((entry) => entry.assetName);
-	} finally {
-		await prisma.$disconnect();
+	} catch (error) {
+		throw error;
 	}
 };
 
@@ -92,7 +86,17 @@ export const fetchUniqueBusCats = async (): Promise<string[]> => {
 		});
 
 		return uniqueBusinessCategories.map((entry) => entry.businessCategory);
-	} finally {
-		await prisma.$disconnect();
+	} catch (error) {
+		throw error;
 	}
 };
+
+process.on("SIGINT", async () => {
+	await prisma.$disconnect();
+	process.exit();
+});
+
+process.on("SIGTERM", async () => {
+	await prisma.$disconnect();
+	process.exit();
+});

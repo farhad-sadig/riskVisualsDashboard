@@ -41,10 +41,11 @@ export default function DashboardPage() {
 			setLoading(false);
 		}
 	}, [dispatch]);
-	
+
 	useEffect(() => {
 		initializeData();
 	}, [initializeData]);
+
 	if (loading) return <Spinner />;
 
 	return (
