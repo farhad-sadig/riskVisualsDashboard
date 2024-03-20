@@ -54,10 +54,8 @@ export default function DashboardPage() {
 			<div className="min-h-[300px] md:col-span-2 p-4 my-4 md:mt-0 ">
 				<LineChart />
 			</div>
-			<div className="md:col-span-2 p-4 mt-4 md:my-0 h-36">
-				<RiskColorSpectrum />
-			</div>
-			<div className="flex md:col-span-2 px-4">
+
+			<div className="flex md:col-span-2 px-4 mt-4">
 				<YearSelect />
 			</div>
 			<div className="min-h-[300px] col-span-1 md:col-span-1 px-4 my-4 md:my-0">
@@ -66,6 +64,9 @@ export default function DashboardPage() {
 
 			<div className="col-span-1 md:col-span-1 px-4 my-4 md:my-0">
 				<Table />
+			</div>
+			<div className="md:col-span-2 px-4 py-2 h-36">
+				<RiskColorSpectrum />
 			</div>
 		</div>
 	);
