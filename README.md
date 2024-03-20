@@ -9,7 +9,7 @@ The overall purpose of the project is to demonstrate high proficiency in complic
 
 The project involves a dashboard to visualize exposure of businesses to risks associated with the climate in the future. The dashboard includes a line chart (D3.js), a map (Mapbox) and a table.
 
-A typical entry in the risks dataset has the following:
+A typical entry in the risks dataset has the following:  
 **Asset Name:** Jones Ltd  
 **Lat:** 42.8334  
 **Long:** -80.38297  
