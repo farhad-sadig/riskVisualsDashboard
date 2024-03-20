@@ -5,7 +5,7 @@
 **Styling:** Tailwind CSS
 
 **ABOUT**  
-The overall purpose of the project is to demonstrate high proficiency in complicated global state managent using Redux Toolkit, component animations/transitions, creation of responsive components and use of JavaScript/TypeScript.
+The overall purpose of the project is to demonstrate proficiency in complicated global state management using Redux Toolkit, component animations/transitions, creation of responsive components and use of JavaScript/TypeScript.
 
 The project involves a dashboard to visualize exposure of businesses to risks associated with the climate in the future. The dashboard includes a line chart (D3.js), a map (Mapbox) and a table.
 
