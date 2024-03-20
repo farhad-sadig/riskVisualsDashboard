@@ -6,6 +6,7 @@ import {
 	setSelectedYear
 } from "@/src/lib/features/selectedYearSlice";
 import { filterDataByYear } from "@/src/lib/features/dataSlice";
+import RiskColorSpectrum from "../riskColorSpectrum/riskColorSpectrum";
 
 const YearSelect = () => {
 	const dispatch = useAppDispatch();

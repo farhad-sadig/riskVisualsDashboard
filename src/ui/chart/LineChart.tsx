@@ -120,7 +120,7 @@ const LineChart = () => {
 					.select(".y-axis")
 					.append("text")
 					.attr("fill", "#f1f5f9")
-					.text("Risk Rating")
+					.text("Max Risk Rating")
 					.style("transform", "rotate(270deg)")
 					.style("text-anchor", "middle");
 			}

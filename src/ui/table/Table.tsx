@@ -1,5 +1,6 @@
 "use client";
 import React, { useCallback, useState } from "react";
+import * as d3 from "d3";
 import {
 	Table as Tbl,
 	TableHeader,
@@ -25,8 +26,6 @@ import { useAppSelector } from "@/src/lib/hooks";
 import { selectRiskDataByYear } from "@/src/lib/features/dataSlice";
 import { RadioButton } from "../chartControls/ChartControls";
 
-type StatusColor = "low" | "medium" | "high";
-
 type SortDirection = "ascending" | "descending";
 
 export type RiskDataItem = Pick<
@@ -34,8 +33,6 @@ export type RiskDataItem = Pick<
 	"assetName" | "businessCategory" | "riskRating" | "riskFactors"
 > & {
 	key: string;
-
-	status: StatusColor;
 };
 
 export type Column = RadioButton & {
@@ -52,19 +49,16 @@ const INITIAL_VISIBLE_COLUMNS: (keyof RiskDataItem)[] = [
 	"businessCategory",
 	"riskRating"
 ];
+const colorScaleLow = d3.interpolateRgb("#AAFF00", "#FFFF00");
+const colorScaleMedium = d3.interpolateRgb("#FFFF00", "#dc2626");
 
-const mapStatusColorToButtonColor = (
-	status: StatusColor
-): "success" | "warning" | "danger" => {
-	switch (status) {
-		case "low":
-			return "success";
-		case "medium":
-			return "warning";
-		case "high":
-			return "danger";
-		default:
-			return "success";
+const mapRiskRatingToColor = (rating: number): string => {
+	if (rating <= 0.15) {
+		return colorScaleLow(rating / 0.15);
+	} else if (rating <= 0.5) {
+		return colorScaleMedium((rating - 0.15) / (0.5 - 0.15));
+	} else {
+		return "#dc2626";
 	}
 };
 
@@ -78,9 +72,7 @@ const Table: React.FC = () => {
 				assetName: r.assetName,
 				businessCategory: r.businessCategory,
 				riskFactors: r.riskFactors,
-				riskRating: r.riskRating,
-				status:
-					r.riskRating <= 0.15 ? "low" : r.riskRating <= 0.5 ? "medium" : "high"
+				riskRating: r.riskRating
 			} as RiskDataItem)
 	);
 
@@ -128,15 +120,19 @@ const Table: React.FC = () => {
 				case "businessCategory":
 					return <>{row.businessCategory}</>;
 				case "riskRating":
-					const riskFactors = row.riskFactors.map((rF) => (
-						<div key={rF.riskFactor}>
-							{rF.riskFactor}: {Math.round(rF.subRiskRating * 100)}%
-						</div>
-					));
+					const riskFactors = row.riskFactors
+						.filter((rF) => Math.round(rF.subRiskRating * 100) > 0)
+						.map((rF) => (
+							<div key={rF.riskFactor}>
+								{rF.riskFactor}: {Math.round(rF.subRiskRating * 100)}%
+							</div>
+						));
 					return (
 						<Tooltip placement="left" content={riskFactors}>
 							<Button
-								color={mapStatusColorToButtonColor(row.status)}
+								style={{
+									backgroundColor: `${mapRiskRatingToColor(row.riskRating)}`
+								}}
 								className={`text-left`}
 							>
 								{`${Math.round(row.riskRating * 100)}%`}
@@ -229,7 +225,7 @@ const Table: React.FC = () => {
 				</div>
 			</div>
 			<div className="flex justify-between items-center">
-				<span className="text-s-400 text-small">
+				<span className="text-default-400 text-small">
 					Total {rows.length} assets
 				</span>
 				<label className="flex items-center text-default-400 text-small">

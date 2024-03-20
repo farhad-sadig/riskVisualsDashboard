@@ -109,7 +109,7 @@ export default function ChartControls() {
 		<div className="flex text-slate-200">
 			<RadioGroup
 				className="modLight"
-				label={`Plot Risk Rating over Time for`}
+				label={`Plot Max Risk Ratings over Years for`}
 				orientation="horizontal"
 				value={selectedControl}
 				onValueChange={setSelectedControl}

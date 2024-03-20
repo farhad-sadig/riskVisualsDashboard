@@ -1,37 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+**Frontend Framework:** Next.js
+**Database:** PostgreSQL
+**ORM (Object-Relational Mapping):** Prisma
+**Global State Managenent:** Redux Toolkit
+**Styling:** Tailwind CSS
 
-## Getting Started
+**ABOUT**
+The overall purpose of the project is to demonstrate high proficiency in complicated global state managent using Redux Toolkit, component animations/transitions, creation of responsive components and use of JavaScript/TypeScript.
 
-First, run the development server:
+The project involves a dashboard to visualize exposure of businesses to risks associated with the climate in the future. The dashboard includes a line chart (D3.js), a map (Mapbox) and a table. 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+A typical entry in the risks dataset has the following:
+**Asset Name:** Jones Ltd
+**Lat:** 42.8334
+**Long:** -80.38297
+**Business Category:** Energy
+**Risk Rating:** 0.14
+**Year:** 2050
+**Risk Factors:** {"Extreme heat": 0.01, "Wildfire": 0.04, "Tornado": 0.03, "Flooding": 0.02, "Volcano": 0.01, "Hurricane": 0.02, "Earthquake": 0.01}
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+To get started with either the map or the table, select a year from the provided dropdown.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+For the selected year, business assets will be visualized on the map as color-coded markers based on their risk rating. The map has added interactivity, such as zooming, panning and displays a tooltip with further details like corresponding risk ratings shown as a percentage, asset name and business category.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The table also responds to the selection of a year from the dropdown. In addition to filtering and sorting capabilities, it has a tooltip showing risk rating breakdown (risk factors that add up to risk rating) when hovering over the rating. Furthermore, the table can easily be optimized to efficiently handle much larger datasets via built-in pagination, can be changed to dispay various amount of rows per page and can hide/show the available columns.
 
-## Learn More
+The line chart gets drawn as a result of either clicking a marker on the map or choosing asset names/business categories from another dropdown. Since there are numerous entries in the dataset for each possible selection in a given year, the corresponding risk rating (shown as a percentage) is calculated by performing data aggregation to find the maximum. When the line chart input changes, it smoothly transitions from the old input to new via animations. Animations are also engaged after window resizing events.
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# risk-visuals

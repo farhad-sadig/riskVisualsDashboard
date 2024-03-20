@@ -17,6 +17,7 @@ import { useCallback, useEffect, useState } from "react";
 import { setAssetNames } from "@/src/lib/features/assetNamesSlice";
 import { setBusinessCategories } from "@/src/lib/features/businessCategoriesSlice";
 import Spinner from "@/src/ui/Spinner";
+import RiskColorSpectrum from "../ui/riskColorSpectrum/riskColorSpectrum";
 
 export default function DashboardPage() {
 	const dispatch = useAppDispatch();
@@ -53,15 +54,17 @@ export default function DashboardPage() {
 			<div className="min-h-[300px] md:col-span-2 p-4 my-4 md:mt-0 ">
 				<LineChart />
 			</div>
-			<div className="col-span-1 md:col-span-2  p-4 mt-4 md:my-0">
+			<div className="md:col-span-2 p-4 mt-4 md:my-0 h-36">
+				<RiskColorSpectrum />
+			</div>
+			<div className="flex md:col-span-2 px-4">
 				<YearSelect />
 			</div>
-
-			<div className="min-h-[300px] col-span-1 md:col-span-1 p-4 my-4 md:my-0">
+			<div className="min-h-[300px] col-span-1 md:col-span-1 px-4 my-4 md:my-0">
 				<Map />
 			</div>
 
-			<div className="col-span-1 md:col-span-1 p-4 my-4 md:my-0">
+			<div className="col-span-1 md:col-span-1 px-4 my-4 md:my-0">
 				<Table />
 			</div>
 		</div>
