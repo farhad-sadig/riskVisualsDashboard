@@ -77,14 +77,17 @@ By integrating these features, the project aims to provide a comprehensive and i
 Below are a few short demos of the key features of the dashboard in action.
 
 Interactivity between the map and the line chart, animated transtions in the line chart:
+
 ![Risk Visuals Dashboard Key Highlights - 1](public/gifs/mg-1.gif)
 
 Responsiveness of the dashboard components and animated resizing of the line chart:
+
 ![Risk Visuals Dashboard Key Highlights - 2](public/gifs/mg-2.gif)
 
 Ability to plot the risks for single or a combination of business names/categories:
+
 ![Risk Visuals Dashboard Key Highlights - 3](public/gifs/mg-3.gif)
 
 Table with filtering and sorting capabilities:
-![Risk Visuals Dashboard Key Highlights - 4](public/gifs/mg-4.gif)
 
+![Risk Visuals Dashboard Key Highlights - 4](public/gifs/mg-4.gif)
