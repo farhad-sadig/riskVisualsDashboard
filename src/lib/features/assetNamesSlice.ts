@@ -30,7 +30,7 @@ const assetNamesSlice = createSlice({
 	}
 });
 
-// Export actions and selectors
+
 export const { setAssetNames, setAssetNamesLoading, setAssetNamesError } =
 	assetNamesSlice.actions;
 export const selectAssetNames = (state: RootState) =>
@@ -40,5 +40,5 @@ export const selectAssetNamesLoading = (state: RootState) =>
 export const selectAssetNamesError = (state: RootState) =>
 	state.assetNames.error;
 
-// Export the reducer
+
 export default assetNamesSlice.reducer;

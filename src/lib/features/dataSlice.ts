@@ -1,5 +1,3 @@
-// dataSlice.ts
-
 import { createSlice } from "@reduxjs/toolkit";
 import { RiskData as PrismaRiskData } from "@prisma/client";
 import { RootState } from "../store";
@@ -58,7 +56,6 @@ const dataSlice = createSlice({
 	}
 });
 
-// Export actions and selectors
 export const {
 	setRiskData,
 	filterDataByYear,
@@ -73,5 +70,4 @@ export const selectRiskDataByAssetsOrBusCats = (state: RootState) =>
 export const selectLoading = (state: RootState) => state.data.loading;
 export const selectError = (state: RootState) => state.data.error;
 
-// Export the reducer
 export default dataSlice.reducer;

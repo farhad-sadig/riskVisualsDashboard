@@ -30,7 +30,6 @@ const businessCategoriesSlice = createSlice({
 	}
 });
 
-// Export actions and selectors
 export const {
 	setBusinessCategories,
 	setBusinessCategoriesLoading,
@@ -43,5 +42,4 @@ export const selectBusinessCategoriesLoading = (state: RootState) =>
 export const selectBusinessCategoriesError = (state: RootState) =>
 	state.businessCategories.error;
 
-// Export the reducer
 export default businessCategoriesSlice.reducer;
